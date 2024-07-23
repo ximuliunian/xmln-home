@@ -28,7 +28,6 @@ export default {
 
         // 社交链接
         socials: {
-            // 是否开启
             enable: true,
             // 链接内容 - 最多8个
             info: [
@@ -78,7 +77,6 @@ export default {
 
     // 备案信息
     ICP: {
-        // 是否开启备案号
         enable: true,
         // 备案号
         info: '豫ICP备2024053500号'
@@ -91,13 +89,18 @@ export default {
             // 轮播图
             banner: {
                 enable: true,
-                info: []
+                // 最多5个
+                info: [
+                    "https://img.ximuliunian.top/壁纸/6/10.png",
+                    "https://img.ximuliunian.top/壁纸/6/11.png",
+                    "https://img.ximuliunian.top/壁纸/6/12.png",
+                    "https://img.ximuliunian.top/壁纸/7/1.png",
+                    "https://img.ximuliunian.top/壁纸/7/3.png"
+                ]
             },
             // 站点导航
             siteNavs: {
-                // 是否开启
                 enable: true,
-                // 列表内容
                 info: [
                     {
                         name: 'bilibili',
@@ -118,7 +121,21 @@ export default {
                     }
                 ]
             },
-
+            // 简介
+            selfInfo: {
+                enable: true,
+                info: [
+                    "h1:这是一个标题",
+                    "h2:这是一个标题",
+                    "h3:这是一个标题",
+                    "p:这是一个内容,所以这里需要换行看了大家会看到哈克联合反恐老师看了返回看了看还能发克里斯蒂和罚款了事老客户收到付款了ask厉害阿斯蒂芬库里和卡戴珊反馈按时灯笼裤的时刻分手快乐和但是风口浪尖",
+                    "p:这是一个内容",
+                    "p:这是一个内容",
+                    "p:这是一个内容",
+                    "p:这是一个内容",
+                    "img:https://img.ximuliunian.top/壁纸/6/10.png",
+                ]
+            }
         },
 
         // 项目 - 想要成果展示需要在 left.projectEnable 中开启
@@ -133,8 +150,8 @@ export default {
 
         // 关于 - 想要成果展示需要在 left.aboutEnable 中开启
         aboutInfo: [
-            "text:这是一个关于信息",
-            "image:https://cdn.jsdelivr.net/gh/ximuliunian/home@main/public/img/avatar.jpg"
+            "p:这是一个关于信息",
+            "img:https://cdn.jsdelivr.net/gh/ximuliunian/home@main/public/img/avatar.jpg"
         ]
     }
 }

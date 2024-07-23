@@ -105,7 +105,7 @@ import LeftInfo from "@/views/app/LeftInfo.vue";
 }
 
 #right-info {
-  margin-top: 25px;
+  margin-top: 200px;
   padding: 25px;
   color: white;
   text-align: center;

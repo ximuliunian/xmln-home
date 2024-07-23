@@ -21,6 +21,22 @@
         </a>
       </el-col>
     </el-row>
+    <!--  轮播图  -->
+    <el-row v-if="config.right.homeInfo.banner.enable" class="card">
+      <el-col :span="24">
+        <el-carousel height="200px" motion-blur>
+          <el-carousel-item v-for="info in config.right.homeInfo.banner.info">
+            <img :src="info" alt="假装这里有一张图片">
+          </el-carousel-item>
+        </el-carousel>
+      </el-col>
+    </el-row>
+    <!--  简介  -->
+    <el-row v-if="config.right.homeInfo.selfInfo.enable" class="card">
+      <el-col :span="24">
+        <ContentView v-for="info in config.right.homeInfo.selfInfo.info" :content="info"/>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -28,6 +44,7 @@
 import DateTime from "@/components/DateTime.vue";
 import DailyEnglish from "@/components/DailyEnglish.vue";
 import config from "../../../homeConfig.js";
+import ContentView from "@/components/ContentView.vue";
 </script>
 
 <style>
@@ -68,6 +85,16 @@ import config from "../../../homeConfig.js";
     fill: currentColor;
     overflow: hidden;
     margin-right: 5px;
+  }
+}
+
+.el-carousel__item {
+  border-radius: 5px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 </style>

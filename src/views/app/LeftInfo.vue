@@ -23,13 +23,13 @@
         主页
       </router-link>
 
-      <router-link to="/project">
+      <router-link v-if="config.left.projectEnable" to="/project">
         <el-icon style="font-size: 20px">
           <Grid/>
         </el-icon>
         项目
       </router-link>
-      <router-link to="/about">
+      <router-link v-if="config.left.aboutEnable" to="/about">
         <el-icon style="font-size: 20px">
           <UserFilled/>
         </el-icon>
