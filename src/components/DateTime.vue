@@ -1,10 +1,10 @@
 <template>
   <div class="time">
     <div class="date">
-      <span>{{ currentTime.year }}&nbsp;年&nbsp;</span>
-      <span>{{ currentTime.month }}&nbsp;月&nbsp;</span>
-      <span>{{ currentTime.day }}&nbsp;日&nbsp;</span>
-      <span class="sm-hidden">{{ currentTime.weekday }}</span>
+      <span>
+        {{ currentTime.year }}&nbsp;年&nbsp;{{ currentTime.month }}&nbsp;月&nbsp;{{ currentTime.day }}&nbsp;日
+      </span>
+      <span class="sm-hidden" style="margin-left: 5px">{{ currentTime.weekday }}</span>
     </div>
     <div class="text">
       <span> {{ currentTime.hour }}:{{ currentTime.minute }}:{{ currentTime.second }}</span>
@@ -59,10 +59,13 @@ onBeforeUnmount(() => {
 
 .date {
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .text {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 </style>

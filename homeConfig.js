@@ -2,19 +2,16 @@
 export default {
     // 背景图片 - 可以是链接或者相对路径
     backImage: [
-        "https://img.ximuliunian.top/壁纸/6/10.png",
-        "https://img.ximuliunian.top/壁纸/6/11.png",
-        "https://img.ximuliunian.top/壁纸/6/12.png",
-        "https://img.ximuliunian.top/壁纸/7/1.png",
-        "https://img.ximuliunian.top/壁纸/7/3.png",
-        "https://img.ximuliunian.top/壁纸/7/4.png",
-        "https://img.ximuliunian.top/壁纸/7/5.png",
-        "https://img.ximuliunian.top/壁纸/7/7.png",
-        "https://img.ximuliunian.top/壁纸/7/8.png",
-        "https://img.ximuliunian.top/壁纸/7/9.png",
-        "https://img.ximuliunian.top/壁纸/7/10.png",
-        "https://img.ximuliunian.top/壁纸/7/11.png",
-        "https://img.ximuliunian.top/壁纸/7/12.png"
+        "/img/background/background1.jpg",
+        "/img/background/background2.jpg",
+        "/img/background/background3.jpg",
+        "/img/background/background4.jpg",
+        "/img/background/background5.jpg",
+        "/img/background/background6.jpg",
+        "/img/background/background7.jpg",
+        "/img/background/background8.jpg",
+        "/img/background/background9.jpg",
+        "/img/background/background10.jpg"
     ],
 
     // 左半屏内容
@@ -121,7 +118,7 @@ export default {
                     }
                 ]
             },
-            // 简介
+            // 信息
             selfInfo: {
                 enable: true,
                 info: [
@@ -139,19 +136,37 @@ export default {
         },
 
         // 项目 - 想要成果展示需要在 left.projectEnable 中开启
-        projectInfo: [
-            {
-                name: '',
-                description: '',
-                url: '',
-                icon: ''
-            }
-        ],
-
-        // 关于 - 想要成果展示需要在 left.aboutEnable 中开启
-        aboutInfo: [
-            "p:这是一个关于信息",
-            "img:https://cdn.jsdelivr.net/gh/ximuliunian/home@main/public/img/avatar.jpg"
-        ]
+        projectInfo: {
+            // 轮播图
+            banner: {
+                enable: true,
+                // 最多五张
+                info: [
+                    "https://img.ximuliunian.top/壁纸/7/8.png",
+                    "https://img.ximuliunian.top/壁纸/7/9.png",
+                    "https://img.ximuliunian.top/壁纸/7/10.png",
+                    "https://img.ximuliunian.top/壁纸/7/11.png",
+                    "https://img.ximuliunian.top/壁纸/7/12.png"
+                ]
+            },
+            // 项目信息
+            info: [
+                {
+                    name: '网站导航',
+                    logo: 'https://www.ximuliunian.top/images/icon/logo.png',
+                    description: '收录一些网站信息',
+                    officialWebsite: '',
+                    internetSite: [
+                        {
+                            name: 'GitHub',
+                            url: '',
+                        }, {
+                            name: 'Gitee',
+                            url: '',
+                        }
+                    ]
+                },
+            ]
+        }
     }
 }

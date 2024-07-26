@@ -1,5 +1,5 @@
 <template>
-  <div class="left-info">
+  <div class="left-info card">
     <!--  LOGO  -->
     <el-row :gutter="20">
       <el-col :span="8" style="display: flex; align-items: center">
@@ -29,12 +29,6 @@
         </el-icon>
         项目
       </router-link>
-      <router-link v-if="config.left.aboutEnable" to="/about">
-        <el-icon style="font-size: 20px">
-          <UserFilled/>
-        </el-icon>
-        关于
-      </router-link>
     </div>
 
     <!--  社交链接  -->
@@ -51,15 +45,12 @@
 
 <script setup>
 import config from "../../../homeConfig.js";
-import {Grid, HomeFilled, UserFilled} from "@element-plus/icons-vue";
+import {Grid, HomeFilled} from "@element-plus/icons-vue";
 </script>
 
 <style scoped>
 .left-info {
   padding: 50px;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
   color: white;
   text-align: center;
   max-width: 450px;

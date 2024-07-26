@@ -18,16 +18,17 @@ let getEnglish = reactive({
 })
 // 获取每日英语
 const getData = async () => {
-  const result = await fetch(api).then(res => res.json());
   const parse = JSON.parse(localStorage.getItem("dailyEnglish"));
   if (parse != null) await printText(parse.content, parse.note)
+
+  const result = await fetch(api).then(res => res.json());
   if (result.code === 200) {
     let content = result.result.content;
     let note = result.result.note;
     if (parse == null) {
       await printText(content, note)
-      localStorage.setItem("dailyEnglish", JSON.stringify({content, note}));
     }
+    localStorage.setItem("dailyEnglish", JSON.stringify({content, note}));
   }
 }
 

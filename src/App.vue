@@ -1,15 +1,17 @@
 <template>
-  <el-container>
+  <Loading :backFlag="backLoading"/>
+  <img v-show="!background" :src="background" @load="backLoading = true">
+  <el-container :style="{backgroundImage: 'url(' + background + ')'}">
     <!-- 主要内容 -->
     <el-main>
       <el-row>
         <!-- 左半屏 -->
-        <el-col :span="12">
+        <el-col :span="spanNum">
           <LeftInfo/>
         </el-col>
         <!-- 右半屏 -->
-        <el-col :span="12" class="right-info">
-          <div id="right-info">
+        <el-col :class="rightDataCSS" :span="spanNum">
+          <div id="right-info" :style="rightHeight">
             <router-view v-slot="{ Component }">
               <transition mode="out-in" name="scale">
                 <component :is="Component"/>
@@ -24,15 +26,18 @@
       <el-row justify="space-around">
         <!-- 建站日期 -->
         <el-col :span="33">
-          建站日期：<span>{{ config.buildTime }}</span>
-        </el-col>
-        <!-- 作者 -->
-        <el-col :span="33">
-          作者：<a href="https://github.com/ximuliunian">曦暮流年</a>
+          <span v-if="flag">建站日期：</span>
+          <span>{{ config.buildTime }}</span>
         </el-col>
         <!-- 备案信息 -->
         <el-col v-if="config.ICP.enable || config.buildTime.includes('ximuliunian.top')" :span="33">
-          备案：<a href="http://beian.miit.gov.cn">{{ config.ICP.info }}</a>
+          <span v-if="flag">备案：</span>
+          <a href="http://beian.miit.gov.cn">{{ config.ICP.info }}</a>
+        </el-col>
+        <!-- 作者 -->
+        <el-col :span="33">
+          <span v-if="flag">作者：</span>
+          <a href="https://github.com/ximuliunian">曦暮流年</a>
         </el-col>
       </el-row>
     </el-footer>
@@ -42,6 +47,48 @@
 <script setup>
 import config from "../homeConfig.js";
 import LeftInfo from "@/views/app/LeftInfo.vue";
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
+import {ElMessage} from "element-plus";
+import Loading from "@/components/Loading.vue";
+
+
+let background = computed(() => {
+  const size = Math.floor(Math.random() * config.backImage.length);
+  return config.backImage[size]
+})
+
+let spanNum = ref(12);
+let flag = ref(true);
+let rightDataCSS = ref("right-info");
+let rightHeight = ref("height: 95vh;")
+let backLoading = ref(false);
+// 页面宽度
+const getWidth = () => {
+  flag.value = window.innerWidth >= 850;
+  rightDataCSS.value = flag.value ? "right-info" : "";
+  spanNum.value = flag.value ? 12 : 24;
+  rightHeight.value = flag.value ? "height: 95vh;" : "margin-top: 500px;";
+};
+
+onMounted(() => {
+
+  // 屏蔽右键
+  document.oncontextmenu = () => {
+    ElMessage({
+      message: "为了浏览体验，本站禁用右键",
+      grouping: true,
+      duration: 2000,
+    });
+    return false;
+  };
+  getWidth();
+  // 监听当前页面宽度
+  window.addEventListener("resize", getWidth);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", getWidth);
+});
 </script>
 
 <style scoped>
@@ -111,7 +158,6 @@ import LeftInfo from "@/views/app/LeftInfo.vue";
   text-align: center;
   min-width: 300px;
   width: 100%;
-  height: 95vh;
 }
 
 /* 隐藏滚动条同时保持滚动功能 */

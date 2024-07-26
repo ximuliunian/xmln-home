@@ -2,11 +2,11 @@
   <div>
     <el-row style="justify-content: space-between">
       <!--  每日英文 - 教书先生API  -->
-      <el-col :span="11" class="card">
+      <el-col :span="spanNum" class="card">
         <DailyEnglish/>
       </el-col>
       <!--  时钟  -->
-      <el-col :span="11" class="card">
+      <el-col v-if="timeFlag" :span="spanNum" class="card">
         <DateTime/>
       </el-col>
     </el-row>
@@ -45,16 +45,39 @@ import DateTime from "@/components/DateTime.vue";
 import DailyEnglish from "@/components/DailyEnglish.vue";
 import config from "../../../homeConfig.js";
 import ContentView from "@/components/ContentView.vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
+import {ElMessage} from "element-plus";
+
+let spanNum = ref(11);
+let timeFlag = ref(true);
+
+const getWidth = () => {
+  timeFlag.value = window.innerWidth >= 880;
+  spanNum.value = timeFlag.value ? 11 : 24;
+};
+
+onMounted(() => {
+
+  // 屏蔽右键
+  document.oncontextmenu = () => {
+    ElMessage({
+      message: "为了浏览体验，本站禁用右键",
+      grouping: true,
+      duration: 2000,
+    });
+    return false;
+  };
+  getWidth();
+  // 监听当前页面宽度
+  window.addEventListener("resize", getWidth);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", getWidth);
+});
 </script>
 
-<style>
-.card {
-  padding: 10px;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
+<style scoped>
 .el-row {
   margin-bottom: 20px;
 }
@@ -73,7 +96,7 @@ import ContentView from "@/components/ContentView.vue";
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
