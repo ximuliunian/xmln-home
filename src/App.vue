@@ -6,11 +6,11 @@
     <el-main>
       <el-row>
         <!-- 左半屏 -->
-        <el-col :span="spanNum">
+        <el-col :span="spanNum" style="height: 95vh;">
           <LeftInfo/>
         </el-col>
         <!-- 右半屏 -->
-        <el-col :class="rightDataCSS" :span="spanNum">
+        <el-col :class="rightDataCSS" :span="spanNum" :style="rightHeight">
           <div id="right-info" :style="rightHeight">
             <router-view v-slot="{ Component }">
               <transition mode="out-in" name="scale">
@@ -67,7 +67,7 @@ const getWidth = () => {
   flag.value = window.innerWidth >= 850;
   rightDataCSS.value = flag.value ? "right-info" : "";
   spanNum.value = flag.value ? 12 : 24;
-  rightHeight.value = flag.value ? "height: 95vh;" : "margin-top: 500px;";
+  rightHeight.value = flag.value ? "height: 95vh;" : "";
 };
 
 onMounted(() => {
@@ -80,9 +80,7 @@ onMounted(() => {
     });
     return false;
   };
-  if (location.origin.includes('ximuliunian.top')) {
-    config.ICP.enable = false
-  }
+  config.ICP.enable = !location.origin.includes('ximuliunian.top')
   getWidth();
   // 监听当前页面宽度
   window.addEventListener("resize", getWidth);
@@ -126,7 +124,6 @@ onBeforeUnmount(() => {
 }
 
 .el-main > .el-row > .el-col {
-  height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;

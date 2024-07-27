@@ -19,7 +19,7 @@ export default {
         // 昵称
         name: '曦暮流年',
         // 头像
-        avatar: 'https://www.ximuliunian.top/images/icon/logo.png',
+        avatar: '/img/logo.png',
         // 简介
         description: '我从来不是那样的人，不能耐心地拾起一地碎片，把它们凑合在一起，然后对自己说，这个修补好了的东西，跟新的完全一样。一样东西破碎了就是破碎了，我宁愿记住它最好时的模样，而不想把它修补好，然后终生看着那些碎了的地方。',
 
