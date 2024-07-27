@@ -30,7 +30,7 @@
           <span>{{ config.buildTime }}</span>
         </el-col>
         <!-- 备案信息 -->
-        <el-col v-if="config.ICP.enable " :span="33">
+        <el-col v-if="ICP " :span="33">
           <span v-if="flag">备案：</span>
           <a href="http://beian.miit.gov.cn">{{ config.ICP.info }}</a>
         </el-col>
@@ -62,6 +62,8 @@ let flag = ref(true);
 let rightDataCSS = ref("right-info");
 let rightHeight = ref("height: 95vh;")
 let backLoading = ref(false);
+let ICP = ref(config.ICP.enable);
+
 // 页面宽度
 const getWidth = () => {
   flag.value = window.innerWidth >= 850;
@@ -69,6 +71,7 @@ const getWidth = () => {
   spanNum.value = flag.value ? 12 : 24;
   rightHeight.value = flag.value ? "height: 95vh;" : "";
 };
+
 
 onMounted(() => {
   // 屏蔽右键
@@ -80,7 +83,7 @@ onMounted(() => {
     });
     return false;
   };
-  config.ICP.enable = !location.origin.includes('ximuliunian.top')
+  ICP.value = !location.origin.includes('ximuliunian.top')
   getWidth();
   // 监听当前页面宽度
   window.addEventListener("resize", getWidth);
