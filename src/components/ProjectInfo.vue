@@ -3,7 +3,7 @@
     <div class="head">
       <img :src="content.logo" alt="假装这里有一张图片">
       <span>{{ content.name }}</span>
-      <a v-if="content.officialWebsite === ''" :href="content.officialWebsite" target="_blank" title="前往发布页">
+      <a v-if="content.officialWebsite !== ''" :href="content.officialWebsite" target="_blank" title="前往发布页">
         <el-icon>
           <Position/>
         </el-icon>
@@ -13,7 +13,7 @@
       {{ content.description }}
     </div>
     <div class="foot">
-      <a v-for="site in content.internetSite" v-if="content.officialWebsite === ''" :href="site.url" target="_blank">
+      <a v-for="site in content.internetSite" :href="site.url" target="_blank">
         {{ site.name }}
       </a>
     </div>
@@ -25,7 +25,6 @@
 import {Position} from "@element-plus/icons-vue";
 
 const props = defineProps(["content"]);
-console.log(props.content)
 </script>
 
 <style scoped>

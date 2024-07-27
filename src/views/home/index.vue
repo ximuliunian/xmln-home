@@ -12,7 +12,7 @@
     </el-row>
     <!--  站点导航  -->
     <el-row v-if="config.right.homeInfo.siteNavs.enable" class="site-nav">
-      <el-col v-for="info in config.right.homeInfo.siteNavs.info" :span="5">
+      <el-col v-for="info in config.right.homeInfo.siteNavs.info" :span="spanNumNav">
         <a :href="info.url" class="card" target="_blank">
           <svg aria-hidden="true" class="icon">
             <use :xlink:href='`#${info.icon}`'></use>
@@ -50,10 +50,12 @@ import {ElMessage} from "element-plus";
 
 let spanNum = ref(11);
 let timeFlag = ref(true);
+let spanNumNav = ref(5);
 
 const getWidth = () => {
   timeFlag.value = window.innerWidth >= 880;
   spanNum.value = timeFlag.value ? 11 : 24;
+  spanNumNav.value = window.innerWidth >= 500 ? 5 : 10;
 };
 
 onMounted(() => {

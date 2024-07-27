@@ -30,7 +30,7 @@
           <span>{{ config.buildTime }}</span>
         </el-col>
         <!-- 备案信息 -->
-        <el-col v-if="config.ICP.enable || config.buildTime.includes('ximuliunian.top')" :span="33">
+        <el-col v-if="config.ICP.enable " :span="33">
           <span v-if="flag">备案：</span>
           <a href="http://beian.miit.gov.cn">{{ config.ICP.info }}</a>
         </el-col>
@@ -71,7 +71,6 @@ const getWidth = () => {
 };
 
 onMounted(() => {
-
   // 屏蔽右键
   document.oncontextmenu = () => {
     ElMessage({
@@ -81,6 +80,9 @@ onMounted(() => {
     });
     return false;
   };
+  if (location.origin.includes('ximuliunian.top')) {
+    config.ICP.enable = false
+  }
   getWidth();
   // 监听当前页面宽度
   window.addEventListener("resize", getWidth);

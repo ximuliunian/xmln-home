@@ -12,7 +12,7 @@
 
     <hr>
     <!--  简介  -->
-    <p class="description">{{ config.left.description }}</p>
+    <p :title="config.left.description" class="description">{{ config.left.description }}</p>
 
     <!--  路由导航  -->
     <div id="router-nav">
@@ -50,7 +50,7 @@ import {Grid, HomeFilled} from "@element-plus/icons-vue";
 
 <style scoped>
 .left-info {
-  padding: 50px;
+  padding: 25px;
   color: white;
   text-align: center;
   max-width: 450px;
@@ -104,7 +104,6 @@ import {Grid, HomeFilled} from "@element-plus/icons-vue";
     margin-top: 10px;
 
     a {
-      width: 100px;
       color: white;
       text-align: left;
       text-decoration: none;
