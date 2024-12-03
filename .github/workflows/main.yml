@@ -1,4 +1,3 @@
-
 name: generate snake
 
 on:
@@ -9,7 +8,7 @@ on:
   # allows to manually run the job at any time
   workflow_dispatch:
 
-  # run on every push on the master branch
+  # run on every push on the master or main branch
   push:
     branches:
       - master
@@ -21,20 +20,26 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: main  # Ensure we're working on the main branch
+
       # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
-      - name: generate github-contribution.svg
+      - name: Generate github-contribution.svg
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: public/img/github-contribution.svg
 
-      # push the content of <build_dir> to a branch
-      # the content will be available at https://raw.githubusercontent.com/<github_user>/<repository>/<target_branch>/<file> , or as github page
-      - name: push github-contribution.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v2.5.0
-        with:
-          target_branch: output
-          build_dir: public/img
+      # Add, commit, and push the generated file to the main branch
+      - name: Commit and push generated file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/img/github-contribution.svg
+          git commit -m "Update github-contribution.svg" || echo "No changes to commit"
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
